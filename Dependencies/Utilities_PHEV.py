@@ -29,9 +29,9 @@ def EngineMapModel(matFile):
 	eng_speed_points, eng_trq_points = np.meshgrid(d['eng_speed_rpm'],d['eng_torque'])
 	minEff = np.nanmin(d['eng_eff'])
 	d['eng_eff'][np.isnan(d['eng_eff'])]=10
-	d['eng_eff'][np.where(eng_speed_points>=4000)]=10
-	d['eng_eff'][np.where(eng_speed_points<=900)]=10
-	d['eng_eff'][np.where(eng_trq_points>=250)]=10
+	d['eng_eff'][np.where(eng_speed_points>=100)]=10
+	d['eng_eff'][np.where(eng_speed_points<=100)]=10
+	d['eng_eff'][np.where(eng_trq_points>=100)]=10
 	d['eng_eff'][np.where(d['eng_eff']<10)]=10
 	data = np.vstack((eng_speed_points[:][:].ravel(),eng_trq_points[:][:].ravel())).T
 	f = scipy.interpolate.NearestNDInterpolator(data, d['eng_eff'].ravel()*0.01)
